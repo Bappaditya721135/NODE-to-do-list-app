@@ -8,6 +8,7 @@ import { UserModel } from "../models/userModel.js";
 
 
 
+
 export const userRegister =  async(req, res) => {
         const {name, email, password} = req.body;
         const isUserExist = await UserModel.findOne({email})
@@ -19,7 +20,7 @@ export const userRegister =  async(req, res) => {
         }
         const encryptedPassword = await bcrypt.hash(password, 10);
         const user = await UserModel.create({name, email, password: encryptedPassword})
-        const token = jwt.sign({_id: user._id}, "feojfeolfjej")
+        const token = jwt.sign({_id: user._id}, process.env.JWT_KEY)
         res.status(200).cookie("token", token, {maxAge: 5*60*1000}).json({
             success: true,
             user,
@@ -44,7 +45,7 @@ export const userLogin = async(req, res) => {
             message: "incorrect password"
         })
     }
-    const token = jwt.sign({_id: user._id}, "feojfeolfjej")
+    const token = jwt.sign({_id: user._id}, process.env.JWT_KEY)
     res.status(200).cookie("token", token).json({
         success: true,
         message: "login successfull"
