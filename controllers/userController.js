@@ -6,7 +6,7 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/userModel.js";
 
 
-const jwt_secrect = process.env.JWT_SECRECT;
+
 
 
 export const userRegister =  async(req, res) => {
@@ -20,7 +20,7 @@ export const userRegister =  async(req, res) => {
         }
         const encryptedPassword = await bcrypt.hash(password, 10);
         const user = await UserModel.create({name, email, password: encryptedPassword})
-        const token = jwt.sign({_id: user._id}, jwt_secrect)
+        const token = jwt.sign({_id: user._id}, process.env.JWT_KEY)
         res.status(200).cookie("token", token, {maxAge: 5*60*1000}).json({
             success: true,
             user,
@@ -45,7 +45,7 @@ export const userLogin = async(req, res) => {
             message: "incorrect password"
         })
     }
-    const token = jwt.sign({_id: user._id}, jwt_secrect)
+    const token = jwt.sign({_id: user._id}, process.env.JWT_KEY)
     res.status(200).cookie("token", token).json({
         success: true,
         message: "login successfull"
