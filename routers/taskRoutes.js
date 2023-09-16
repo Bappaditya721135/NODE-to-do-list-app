@@ -1,5 +1,5 @@
 import express from "express";
-import { isAuthenticated } from "../utils/isAuthenticated.js";
+import { isAuthenticated } from "../middleware/isAuthenticated.js";
 
 // controllers 
 import {getMyTask, createTask, updateTask, deleteTask} from "../controllers/taskController.js";
