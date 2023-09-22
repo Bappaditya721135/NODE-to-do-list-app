@@ -4,6 +4,7 @@ import {router as taskRouter} from "./routers/taskRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import { errorHandler } from "./middleware/errorHandler.js";
+import cors from "cors";
 
 
 export const app = express()
@@ -25,4 +26,9 @@ app.use("/api/v1/task", taskRouter)
 
 // error handler 
 app.use(errorHandler)
+app.use(cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+}))
 
