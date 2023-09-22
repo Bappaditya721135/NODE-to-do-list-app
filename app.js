@@ -10,7 +10,7 @@ import cors from "cors";
 export const app = express()
 
 dotenv.config({
-    path: "./config.env",
+    path: "./config/config.env",
 })
 
 

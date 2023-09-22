@@ -37,6 +37,7 @@ export const userRegister =  async(req, res, next) => {
 
 
 export const userLogin = async(req, res, next) => {
+    // console.log(req.user)
     try {
         const {email, password} = req.body;
         const user = await UserModel.findOne({email}).select("+password")
