@@ -5,7 +5,7 @@ import {app} from "./app.js"
 
 
 
-app.get("/",(req, res) => {
+app.get("/",cors(),(req, res) => {
     res.send("this is the / page")
 })
 
