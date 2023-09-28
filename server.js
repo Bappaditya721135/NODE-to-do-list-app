@@ -6,7 +6,10 @@ import {app} from "./app.js"
 
 
 app.get("/",cors(),(req, res) => {
-    res.send("this is the / page")
+    res.status(200).json({
+        success: true,
+        message: "this is the node home page"
+    })
 })
 
 app.listen(process.env.PORT, () => {
