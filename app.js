@@ -27,7 +27,7 @@ app.use("/api/v1/task", taskRouter)
 // error handler 
 app.use(errorHandler)
 app.use(cors({
-    origin: "*",
+    origin: [process.env.FRONTEND_URL],
     methods: ["GET", "POST", "PUT", "DELETE"],
     credentials: true,
 }))
